@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -28,7 +29,7 @@ public class UserController {
     @Value("${com.zjy.url.password}")
     private String password;
 
-    @RequestMapping(value = "register")
+    @RequestMapping(value = "register",method = RequestMethod.POST)
     public String register(UserInfo userInfo) {
         int flag = userService.addUser(userInfo);
         return JsonResult.toString(200, "添加成功");

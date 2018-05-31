@@ -5,18 +5,23 @@ import com.zjy.springboot.model.pojo.UserInfo;
 import com.zjy.springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service
+@Service //springboot里面的事物，貌似不需要配置，只要直接加注解就可以了，亲测
 public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserInfoMapper userInfoMapper;
 
+    @Transactional
     @Override
     public int addUser(UserInfo userInfo) {
-       return userInfoMapper.insert(userInfo);
+        int addFlag = userInfoMapper.insert(userInfo);
+        UserService j=null;
+        j.selectAll(); //测试事物的回滚
+        return addFlag;
     }
 
     @Override

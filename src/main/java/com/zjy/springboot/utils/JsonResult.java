@@ -10,7 +10,7 @@ import java.io.Serializable;
  *
  * @author
  */
-public class JsonResult{
+public class JsonResult {
 
     private Integer code;
     private String msg;
@@ -21,11 +21,11 @@ public class JsonResult{
 
     public JsonResult(Integer code, Object data) {
         this.code = code;
-        this.msg ="";
+        this.msg = "";
         this.data = data;
     }
 
-    public JsonResult(Integer code,String message, Object data) {
+    public JsonResult(Integer code, String message, Object data) {
         this.code = code;
         this.msg = message;
         this.data = data;
@@ -43,8 +43,8 @@ public class JsonResult{
         return JSON.toJSONString(new JsonResult(code, data));
     }
 
-    public static String toString(Integer code, String message,Object data) {
-        return JSON.toJSONString(new JsonResult(code,message,data));
+    public static String toString(Integer code, String message, Object data) {
+        return JSON.toJSONString(new JsonResult(code, message, data));
     }
 
     /**
@@ -62,15 +62,13 @@ public class JsonResult{
         return JSON.toJSONString(jsonResult);
     }
 
-    public static String toString(Integer code,String message) {
+    public static String toString(Integer code, String message) {
         JsonResult jsonResult = new JsonResult();
         jsonResult.setCode(code);
         jsonResult.setMsg(message);
         jsonResult.setData("");
         return JSON.toJSONString(jsonResult);
     }
-
-
 
     public Integer getCode() {
         return code;

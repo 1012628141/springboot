@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+/*序列化工具类*/
 public class SerializeUtil {
     static final Class<?> CLAZZ = SerializeUtil.class;
 
