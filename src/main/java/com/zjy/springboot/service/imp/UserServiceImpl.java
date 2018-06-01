@@ -19,8 +19,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public int addUser(UserInfo userInfo) {
         int addFlag = userInfoMapper.insert(userInfo);
-        UserService j=null;
-        j.selectAll(); //测试事物的回滚
+       /* UserService j=null;
+        j.selectAll();*/ //测试事物的回滚
         return addFlag;
     }
 
