@@ -19,7 +19,7 @@ public class LoginInterceptor implements HandlerInterceptor{
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         logger.info("[经过拦截器]");
 
-        return false;
+        return true;
     }
 
     @Override
