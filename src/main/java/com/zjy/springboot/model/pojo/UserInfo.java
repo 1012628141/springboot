@@ -1,8 +1,11 @@
 package com.zjy.springboot.model.pojo;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class UserInfo {
+public class UserInfo implements Serializable{
     private Integer id;
 
     private String phone;
@@ -15,6 +18,8 @@ public class UserInfo {
 
     private Integer gender;
 
+    /*fastJson 定制序列化*/
+    @JSONField(format="yyyy-MM-dd HH:mm:ss")
     private Date birth;
 
     private String url;

@@ -3,11 +3,11 @@ package com.zjy.springboot.utils;
 import java.io.*;
 
 import java.io.InputStream;
-import org.junit.Test;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
+
 /*FTP文件上传的工具类*/
 public class FTPUtil {
     /**
@@ -134,7 +134,7 @@ public class FTPUtil {
         return result;
     }
 
-
+/*
     @Test
     public void testFtpUtil() throws FileNotFoundException {
         FileInputStream fileInputStream = new FileInputStream(new File("d:\\32.jpg"));
@@ -143,5 +143,5 @@ public class FTPUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }

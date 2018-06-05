@@ -26,7 +26,7 @@ public class SerializeUtil {
             bos.close();
             rv = bos.toByteArray();
         } catch (Exception e) {
-           /* LoggerUtils.fmtError(CLAZZ,e, "serialize error %s", JSONObject.fromObject(value));*/
+           e.printStackTrace();
         } finally {
             close(os);
             close(bos);
