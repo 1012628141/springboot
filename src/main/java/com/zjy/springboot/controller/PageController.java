@@ -13,7 +13,6 @@ public class PageController {
 
     @RequestMapping(value = "{page}")
     public String jumpPage(@PathVariable("page") String page){
-        System.out.println(page);
         return page;
     }
 

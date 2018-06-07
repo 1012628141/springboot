@@ -17,8 +17,9 @@ public class MybatisController {
     public String testRedis(){
         JedisUtil.setex("test_Springboot","hello springboot",1000);
         String ex = JedisUtil.get("test_Springboot");
-        logger.info("Redis存储的内容是：["+ex+"]");
+        logger.info("[Redis]存储的内容是：["+ex+"]");
         return JsonResult.toString(200,"Jedis 存储成功",ex);
     }
+
 
 }

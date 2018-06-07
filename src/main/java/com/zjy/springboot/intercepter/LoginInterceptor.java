@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 @Component //自定义拦截器，加此注解，为了后面注入
 public class LoginInterceptor implements HandlerInterceptor{
 
-    protected static Logger logger = LoggerFactory.getLogger(MybatisController.class);
+    protected static Logger logger = LoggerFactory.getLogger(LoginInterceptor.class);
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {

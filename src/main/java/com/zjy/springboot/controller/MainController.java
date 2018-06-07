@@ -14,7 +14,4 @@ public class MainController {
         return "Spring Hello World";
     }
 
-
-
-
 }

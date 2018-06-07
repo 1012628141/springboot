@@ -1,10 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html style="height:100%">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta fttp-equiv="X-UA-Compatible"content="IE=edge">
+    <title>你喜欢我嘛</title>
 </head>
-<body>
-    static目录下，测试页面
+<style type="text/css">
+    button.like{
+        background-color:hotpink;
+        width:5%;
+        height:7%;
+    }
+    button.disLike{
+        background-color:
+                #00a7d0;
+        width:5%;
+        height:7%;
+    }
+</style>
+<body style="height:90%">
+<div id="button-div" style="width:100%;height:90%">
+    <button class="like" id="like"  onClick="alertLike();">喜欢</button>
+</div>
+<div id="disDiv" style="height:90%">
+    <button class="disLike" id="dislike"  onMouseMove="changeButton();" style="margin-left:10%;margin-top:10%">不喜欢</button>
+</div>
+<script type="text/javascript">
+    function changeButton()
+    {
+        var dislike=document.getElementById("dislike");
+        dislike.parentNode.removeChild(dislike);
+
+
+        var div=document.getElementById("disDiv");
+        var left=Math.floor(Math.random()*90);
+        var top=Math.floor(Math.random()*40)+2;
+        var button="<button class='disLike' style='margin-left:"+left+"%;margin-top:"+top+"%' id='dislike' onMouseMove='changeButton();'>不喜欢</button>";
+        div.innerHTML+=button;
+    }
+    function alertLike(){
+        alert("我也喜欢你,真是太开心了!");
+    }
+</script>
 </body>
 </html>

@@ -1,15 +1,20 @@
 package com.zjy.springboot.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.rabbitmq.client.Channel;
 import com.zjy.springboot.config.ProjectConfig;
 import com.zjy.springboot.inteface.DubboInteface;
+import com.zjy.springboot.model.dto.WcMsg;
 import com.zjy.springboot.model.pojo.UserInfo;
 import com.zjy.springboot.rabbitmq.MqProvider;
 import com.zjy.springboot.service.UserService;
 import com.zjy.springboot.utils.JsonResult;
+import com.zjy.springboot.websocket.WebSocketTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.rabbit.support.CorrelationData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,6 +28,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 
 @RestController
@@ -36,6 +42,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private WebSocketTest webSocketTest;
+
     @Resource
     private DubboInteface dubboService;
 
@@ -44,6 +53,7 @@ public class UserController {
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
+
 
     @Value("${com.zjy.url.password}")
     private String password;
@@ -85,8 +95,37 @@ public class UserController {
         userInfo.setEmail("1012628141@qq.com");
         userInfo.setGender(1);
         rabbitTemplate.convertAndSend("test_queues",userInfo);
-
+        rabbitTemplate.convertAndSend("test_queues",userInfo);
         /*经测试，rabbitMq如果传递对象也是通过序列化成二进制流，如果对象没有实现接口，虽然会生成消息，body中却没有内容，建议传递序列化对象或者序列化JsonString*/
+        return JsonResult.toString(200, "查询成功");
+    }
+
+    @RequestMapping(value = "testRabbitMqAll")
+    public String testRabbitMqAll() {
+        UserInfo userInfo = new UserInfo();
+        userInfo.setBirth(new Date());
+        userInfo.setName("小明");
+        userInfo.setEmail("1012628141@qq.com");
+        userInfo.setGender(1);
+        /*向交换机上添加消息*/
+        /*自定义交换机，交换机绑定队列，在向交换机发送消息，绑定的队列都可以收到消息*/
+        rabbitTemplate.convertAndSend("fanoutExchange","",userInfo);
+        return JsonResult.toString(200, "查询成功");
+    }
+
+
+    @RequestMapping(value = "testWcAll")
+    public String testWcAll() {
+        webSocketTest.pushMsgAll("[测试] 这是服务端的推送！");
+        return JsonResult.toString(200, "查询成功");
+    }
+
+    @RequestMapping(value = "testWc")
+    public String testWc(Integer userId) {
+        WcMsg wcMsg = new WcMsg();
+        wcMsg.setUserId(userId);
+        wcMsg.setMessage("[测试]这是推送");
+        webSocketTest.pushMsg(wcMsg);
         return JsonResult.toString(200, "查询成功");
     }
 }
